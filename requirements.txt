@@ -1,0 +1,4 @@
+###### Requirements without Version Specifiers ######`
+discord.py
+lxml
+python-dotenv
