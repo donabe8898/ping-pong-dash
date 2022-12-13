@@ -41,3 +41,8 @@ def dot_env_guild_id() -> str:
     guild_id_str = os.environ.get("GUILD_ID")
     guild_id = int(guild_id_str)
     return guild_id
+
+def dot_env_channel_id() -> str:
+    channel_id_str = os.environ.get("CHANNEL_ID")
+    channel_id = int(channel_id_str)
+    return channel_id
