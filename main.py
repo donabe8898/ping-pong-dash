@@ -34,12 +34,9 @@ from setuptools import Command
 import envop
 import embed
 
-json_open = open("fortune.json","r")    # opening file
-fortune_list =  json.load(json_open)
 BOT_TOKEN = envop.dot_env_bot_token()   # slashcommand testDotEnv
 GUILD_ID = envop.dot_env_guild_id() # 鯖ID
 CHANNEL_ID = envop.dot_env_channel_id()
-Length = len(fortune_list)  # 名言の個数
 
 ### begin intents
 intents = discord.Intents.default()
@@ -49,26 +46,28 @@ client = discord.Client(intents=intents)
 tree = app_commands.CommandTree(client)
 ### end intents
 
+"""
 @tree.command(name="add",description="Adding vc channel",guild=discord.Object(id=GUILD_ID))
 async def hlw(interaction) -> None:
+"""
 
 @client.event
 async def on_voice_state_update(member, before, after):
-    # Assign message channel
+    global sendEmbed
+    #  Assign message channel
     if before.channel != after.channel:
         botRoom = client.get_channel(CHANNEL_ID)
         announceChannelIds = [1049940299864080477]
-    if after.channel is not None and after.channel.id in announceChannelIds:
-        if before.channel is None:
-            asyncio.run(embed.create_embed(member))
-        else
-            await embed.edit_embed(embed.edit_embed(member))
+        ## under debug
+        if after.channel is not None and after.channel.id in announceChannelIds:
+            if before.channel is None:
+                # asyncio.run(embed.create_embed(member, after.channel))
+                sendEmbed = await embed.EmbedSender.create_embed(member, after.channel)
+                await botRoom.send(embed=sendEmbed)
+            else:
+                update_embed = embed.EmbedSender.edit_embed(member, after.channel, sendEmbed)
+                await sendEmbed.edit(embed=update_embed)
 
-
-# 開始処理
-@client.event
-async def on_ready() -> None:
-    await tree.sync(guild=discord.Object(id=GUILD_ID))
 
 # 起動
 client.run(BOT_TOKEN)
