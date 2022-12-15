@@ -1,9 +1,10 @@
 # ping-pong-dash
 
-VCに入室したらどこかのTCに報告が行く
-
+## about
+- VCに入室したらどこかのTCに報告が行くで。
+- 一度入室した人がいるとembedを更新するようになってるで。全員抜けてもう一度入ると新たなembedが生成されるで。
 ## setup
-1. requirements.txtの依存関係をインストールするんやで
+1. requirements.txtの依存関係をインストールするんやで。
 2. ターミナルで`python3 main.py`
 ## Enviroment
 
