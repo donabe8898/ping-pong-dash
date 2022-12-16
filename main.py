@@ -37,6 +37,7 @@ import embed
 BOT_TOKEN = envop.dot_env_bot_token()   # slashcommand testDotEnv
 GUILD_ID = envop.dot_env_guild_id() # 鯖ID
 CHANNEL_ID = envop.dot_env_channel_id()
+VC_CHANNEL_ID_LIST = envop.dot_env_vc_channel_id()
 
 ### begin intents
 intents = discord.Intents.default()
@@ -57,9 +58,8 @@ async def on_voice_state_update(member, before, after):
     #  Assign message channel
     if before.channel != after.channel:
         botRoom = client.get_channel(CHANNEL_ID)
-        announceChannelIds = [1049940299864080477]
         ## under debug
-        if after.channel is not None and after.channel.id in announceChannelIds:
+        if after.channel is not None and after.channel.id in VC_CHANNEL_ID_LIST:
             if before.channel is None:
                 # asyncio.run(embed.create_embed(member, after.channel))
                 sendEmbed = await embed.EmbedSender.create_embed(member, after.channel)

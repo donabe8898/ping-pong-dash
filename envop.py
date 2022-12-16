@@ -46,3 +46,7 @@ def dot_env_channel_id() -> str:
     channel_id_str = os.environ.get("CHANNEL_ID")
     channel_id = int(channel_id_str)
     return channel_id
+
+def dot_env_vc_channel_id() -> list:
+    vcChannelIdList = os.environ.get("VC_CHANNEL_ID")
+    return vcChannelIdList
